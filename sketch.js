@@ -1,6 +1,6 @@
 var trex, trex_correndo;
 var solo, imagemDoSolo, soloInvisivel;
-
+var nuvem;
 function preload(){
   trex_correndo = loadAnimation("trex1.png", "trex3.png", "trex4.png");
   imagemDoSolo = loadImage("ground2.png");
@@ -11,7 +11,7 @@ function setup() {
   trex = createSprite(35,150,20,50);
   trex.scale = 0.5;
   solo = createSprite(300,170,600,20);
-  solo.addImage("ground", imagemDoSolo);
+  solo.addImage("solo", imagemDoSolo);
   
   //criando movimento de corrida
   trex.addAnimation("correndo", trex_correndo);
@@ -39,7 +39,14 @@ function draw(){
   
   //barreira do chão
   trex.collide(soloInvisivel);
-  
+  gerarNuvens();
   drawSprites();
 }
 
+function gerarNuvens(){
+  // 60, 120, 180
+  if(frameCount % 60 == 0){
+    nuvem = createSprite(600,100,40,40);
+    nuvem.velocityX = -3;
+  }
+}
